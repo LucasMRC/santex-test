@@ -7,20 +7,24 @@ import styled, { keyframes } from 'styled-components';
 
 export const ListContainer = styled.div`
     display: flex;
+    width: 62rem;
+    margin: .5rem auto;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 `;
 
 // ---- ProductItem ---- //
 
 export const Card = styled.div`
-    width: 300px;
+    width: 10rem;
+    height: 13rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-    border-radius: 10px;
+    padding: .5rem;
+    border-radius: .5rem;
     border: 1px solid #ccc;
-    margin: 10px 10px;
+    margin: .5rem;
     box-shadow: 1px 1px 1px #000;
     transition: filter ease 1s;
     background: #ddd;
@@ -30,24 +34,18 @@ export const Card = styled.div`
 `;
 
 export const CardImage = styled.img`
-    width: 100%;
-    height: 250px;
+    width: 75%;
+    height: 7.5rem;
 `;
 
 export const CardBody = styled.div``;
 
 export const CardHeader = styled.div`
-display: flex;
-justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 `;
 
 export const CardTitle = styled.h5``;
-
-export const CardPrice = styled.h3``;
-
-export const CardContent = styled.p`
-    font-size: 14px;
-`;
 
 export const CardButton = styled.button``;
 
@@ -57,13 +55,30 @@ export const CardButton = styled.button``;
 
 export const HeaderContainer = styled.header`
     background: red;
-    margin-block-end: 50px;
+    margin-block-end: 3rem;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: .5rem 14rem;
 `;
 
-export const HeaderSubtotal = styled(CardPrice)``;
+export const HeaderOrderInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    color: #fff;
+`;
+
+export const HeaderSubtotal = styled.h3`
+    margin: 0;
+    text-align: right;
+`;
+
+export const HeaderTotalItems = styled.p`
+    margin: 0;
+    text-align: right;
+    font-size: .9rem;
+`;
 
 export const HeaderImage = styled.img``;
 
@@ -71,104 +86,109 @@ export const HeaderImage = styled.img``;
 /* ======== Spinner ======== */
 /* ========================= */
 
-export const SpinnerContainer = styled.div`
-    width: 100vw;
-    height: 80vh;
-    position: relative;
+const Gradient = keyframes`
+    0% {
+      background-position: -100% 0;
+    }
+
+    100% {
+      background-position: 100% 0;
+    }
 `;
 
-export const SpinnerBackground = styled.div`
-    background-color: #cccccc;
+export const SkeletonCard = styled(Card)`
+    animation-name: ${Gradient};
+    animation-duration: 3.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    background: linear-gradient(
+        to right,
+        #ccc 2%,
+        #ddd 18%,
+        #ccc 33%
+    );
+    background-size: 50%;
+    box-shadow: none;
+`;
+
+/* ======================= */
+/* ======== Modal ======== */
+/* ======================= */
+
+export const ModalContaier = styled.div`
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+    padding-right: 15px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: #0005;
+`;
+
+    export const ModalContent = styled.div`
+    box-shadow: 0 0 .25rem #000;
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 75px;
-    height: 75px;
-    border-radius: 15px;
+    transform: translate(-50%, -50%);
+    width: 20rem;
+    height: 550px;
+    border-radius: 0.5rem;
+    background: #808080;
+    padding: 2rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    opacity: .5;
 `;
 
-// ---- SpinnerAnimation ---- //
-
-export const Rotate = keyframes`
-    0% { 
-        -webkit-transform: rotate(0deg) scale(0.8); 
-        -moz-transform: rotate(0deg) scale(0.8);
-    }
-
-    50% {
-        -webkit-transform: rotate(360deg) scale(1.2); 
-        -moz-transform: rotate(360deg) scale(1.2);
-    }
-
-    100% { 
-        -webkit-transform: rotate(720deg) scale(0.8); 
-        -moz-transform: rotate(720deg) scale(0.8);
-    }
+export const ModalHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
 `;
 
-export const Ball1 = keyframes`
-    0% {
-        box-shadow: 30px 0 0 #f8b334;
-    }
-
-    50% {
-        box-shadow: 0 0 0 #f8b334;
-        margin-bottom: 0;
-        -webkit-transform: translate(15px,15px);
-        -moz-transform: translate(15px, 15px);
-    }
-
-    100% {
-        box-shadow: 30px 0 0 #f8b334;
-        margin-bottom: 10px;
-    }
+export const ModalTitle = styled(CardTitle)`
+    align-self: flex-start;
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
 `;
 
-export const Ball2 = keyframes`
-    0% {
-        box-shadow: 30px 0 0 #ff9e00;
-    }
+export const ModalImage = styled.img`
+    width: 100%;
+    height: 14rem;
+    margin: 2rem 0 1rem;
+`;
 
-    50% {
-        box-shadow: 0 0 0 #ff9e00;
-        margin-top: -20px;
-        -webkit-transform: translate(15px,15px);
-        -moz-transform: translate(15px, 15px);
-    }
+export const ModalPrice = styled(HeaderSubtotal)`
+    align-self: flex-end;
+    margin: 0 0 1rem;
+`;
 
-    100% {
-        box-shadow: 30px 0 0 #ff9e00;
-        margin-top: 0;
+export const ModalCloseButton = styled.button`
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1001;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1001;
+    transition: color ease 1s;
+    color: black;
+    font-size: 1.5rem;
+    &:hover {
+        color: white;
     }
 `;
 
-// -------------------------- //
-
-export const Loader = styled.div`
-    animation: ${Rotate} 1s infinite;
-    height: 50px;
-    width: 50px;
-    &:before,
-    &:after {
-        border-radius: 50%;
-        content: '';
-        display: block;
-        height: 20px;
-        width: 20px;
-    }
-    &:before {
-        animation: ${Ball1} 1s infinite;
-        background-color: #ff9732;
-        box-shadow: 30px 0 0 #f8b334;
-        margin-bottom: 10px;
-    }
-    &:after {
-        animation: ${Ball2} 1s infinite; 
-        background-color: #ffc400;
-        box-shadow: 30px 0 0 #ff9e00;
-    }
+export const ModalActionButton = styled.button`
+    position: absolute;
+    bottom: 1rem;
 `;
+
+
+/* ======================= */
+/* ======================= */
+/* ======================= */
