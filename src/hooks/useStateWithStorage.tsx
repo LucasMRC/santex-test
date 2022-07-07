@@ -1,38 +1,21 @@
 import { useState, useEffect } from 'react';
 
-export default function useStateWithStorage(
+export default function useStateWithStorage<T>(
 	key: string,
-	defaultValue: string
-) {
-	const [ storage, setStorage ] = useState({});
+	defaultValue: T
+): [ T, (value: T) => void ] {
+	const [ value, setValueInState ] = useState(defaultValue);
 
 	useEffect(() => {
+		const keyValue = localStorage.getItem(key);
+		if (!keyValue) return;
+		setValueInState(JSON.parse(keyValue));
+	}, [ key ]);
 
-		const savedStorage: {
-			[key: string]: string;
-		} = {};
-
-		for (let i = 0; i < localStorage.length; i++) {
-			const key = localStorage.key(i);
-			if (key !== null) {
-				savedStorage[key] = localStorage.getItem(key) as string;
-			}
-		}
-
-		setStorage(Object.keys(savedStorage).map(key => ({
-			[key]: JSON.parse(savedStorage[key])
-		})));
-	}, [ ]);
-
-	const updateStorage = (key: string, value: unknown) => {
+	const setValue = (value: T) => {
 		localStorage.setItem(key, JSON.stringify(value));
-		setStorage(prevState => ({
-			...prevState,
-			[key]: value
-		}));
-	}
+		return setValueInState(value);
+	};
 
-	const clearStorage = localStorage.clear();
-
-	return { storage, updateStorage, clearStorage };
-}
+	return [ value, setValue ];
+};

@@ -1,19 +1,24 @@
+import { useEffect, useRef } from 'react';
+
 // Hooks
 import useOrder from '../hooks/useOrder';
-// import useStateWithStorage from '../hooks/useStateWithStorage';
+import useStateWithStorage from '../hooks/useStateWithStorage';
 
 // Helpers
 import { formatPrice } from '../helpers/index';
-// import { useEffect } from 'react';
 
 export function Header() {
 	const { order } = useOrder();
-	// const { storage, updateStorage } = useStateWithStorage();
+	const [ subtotal, setSubtotal ] = useStateWithStorage<number>('subtotal', 0);
+	const subTotalFromOrder = useRef<number>(order.subtotal);
 
-	// useEffect(() => {
-	// 	if (order.subtotal !== 0)
-	// 	updateStorage("subtotal", order.subtotal);
-	// }, [order, updateStorage]);
+	useEffect(() => {
+		if (order.subtotal !== subTotalFromOrder.current) {
+			setSubtotal(order.subtotal);
+			subTotalFromOrder.current = order.subtotal;
+		}
+	}, [ order.subtotal, setSubtotal ]);
+
 
 	return (
 		<header
@@ -30,8 +35,8 @@ export function Header() {
 				alt="logo"
 			/>
 			<h3>
-				{formatPrice(order.subtotal)}
+				{formatPrice(subtotal)}
 			</h3>
 		</header>
 	);
-}
+};
