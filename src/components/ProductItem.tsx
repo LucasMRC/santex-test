@@ -1,6 +1,18 @@
 import { useEffect } from 'react';
 import { useMutation } from "@apollo/client";
 
+// Components
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    CardImage,
+    CardContent,
+    CardButton,
+    CardPrice,
+    CardTitle
+} from './styled';
+
 // Types
 import { FetchedOrder, Item } from "../types";
 
@@ -18,6 +30,7 @@ export function ProductItem({ item }: { item: Item }) {
     const [ addItemToOrder, { data, loading }] = useMutation<FetchedOrder>(ADD_ITEM_TO_ORDER);
 
     useEffect(() => {
+        console.log({ loading, data });
         if (!loading && data?.order) {
             updateOrder(parseOrder(data));
         }
@@ -33,40 +46,31 @@ export function ProductItem({ item }: { item: Item }) {
     };
 
     return (
-        <div
-            className="card"
-        >
-            <img
+        <Card>
+            <CardImage
                 src={item.pictureLink}
                 alt={item.slug}
-                className="product-image"
             />
-            <div
-                className="card-body"
-            >
-                <div
-                    className="card-header"
-                >
-                    <h5 className="card-title">
+            <CardBody>
+                <CardHeader>
+                    <CardTitle>
                         {item.name}
-                    </h5>
-                    <h3>
+                    </CardTitle>
+                    <CardPrice>
                         {formatPrice(item.price)}
-                    </h3>
-                </div>
-                <p
-                    className="card-description"
+                    </CardPrice>
+                </CardHeader>
+                <CardContent
                     role="contentinfo"
                 >
                     {item.description}
-                </p>
-            </div>
-            <button
-                className="buy-button"
+                </CardContent>
+            </CardBody>
+            <CardButton
                 onClick={handleAddItemToOrder}
             >
                 Add to chart
-            </button>
-        </div>
+            </CardButton>
+        </Card>
     );
 };
