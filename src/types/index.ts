@@ -24,8 +24,8 @@ export type FetchedOrder = {
 			};
 			quantity: number;
 		}[];
-	}
-}
+	};
+};
 
 export type Item = {
     name: string;
@@ -41,11 +41,11 @@ export type Order = {
 	id: string;
 	products: ProductInOrder[];
 	subtotal: number;
-}
+};
 
 export type ProductInOrder = {
 	id: string;
 	name: string;
 	price: number;
 	quantity: number;
-}
+};

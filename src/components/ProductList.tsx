@@ -11,7 +11,10 @@ import { ProductItem } from './ProductItem';
 import { Spinner } from './Spinner';
 
 // Types
-import { FetchedItem, Item } from '../types';
+import { Item } from '../types';
+
+// Helpers
+import { parseItems } from '../helpers';
 
 export function ProductList() {
 	const { error, data, loading } = useQuery(GET_PRODUCTS);
@@ -19,16 +22,8 @@ export function ProductList() {
 
 	useEffect(() => {
 		if (!loading)
-			setItems(data.products.items.map((item: FetchedItem) => ({
-				name: item.name,
-				slug: item.slug,
-				description: item.description,
-				price: item.variants[0].price,
-				pictureLink: item.featuredAsset.preview,
-				id: item.id,
-				variantId: item.variants[0].id // needed to update the order
-			} as Item)));
-	}, [ data?.products.items, loading ]);
+			setItems(parseItems(data));
+	}, [ data, loading ]);
 
 	const handleScreen = () => {
 		return loading

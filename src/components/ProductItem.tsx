@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { FetchedOrder, Item } from "../types";
 
 // Helpers
-import { formatPrice } from '../helpers';
+import { parseOrder, formatPrice } from '../helpers';
 
 // Mutations
 import { ADD_ITEM_TO_ORDER } from "../graphql/mutations";
@@ -19,17 +19,7 @@ export function ProductItem({ item }: { item: Item }) {
 
     useEffect(() => {
         if (!loading && data?.order) {
-            const updatedOrder = {
-                id: data.order.id,
-                subtotal: data.order.subTotal,
-                products: data.order.lines.map(({ productVariant, quantity }) => ({
-                    id: productVariant.id,
-                    name: productVariant.name,
-                    price: productVariant.price,
-                    quantity
-                }))
-            };
-            updateOrder(updatedOrder);
+            updateOrder(parseOrder(data));
         }
     }, [ data, loading, updateOrder ]);
 
@@ -40,7 +30,7 @@ export function ProductItem({ item }: { item: Item }) {
                 quantity: 1
             }
         });
-    }
+    };
 
     return (
         <div
@@ -66,6 +56,7 @@ export function ProductItem({ item }: { item: Item }) {
                 </div>
                 <p
                     className="card-description"
+                    role="contentinfo"
                 >
                     {item.description}
                 </p>
