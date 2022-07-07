@@ -1,5 +1,12 @@
 import { useEffect, useRef } from 'react';
 
+// Components
+import {
+	HeaderContainer,
+	HeaderImage,
+	HeaderSubtotal
+} from './styled';
+
 // Hooks
 import useOrder from '../hooks/useOrder';
 import useStateWithStorage from '../hooks/useStateWithStorage';
@@ -8,7 +15,7 @@ import useStateWithStorage from '../hooks/useStateWithStorage';
 import { formatPrice } from '../helpers/index';
 
 export function Header() {
-	const { order } = useOrder();
+	const { order, clearCart } = useOrder();
 	const [ subtotal, setSubtotal ] = useStateWithStorage<number>('subtotal', 0);
 	const subTotalFromOrder = useRef<number>(order.subtotal);
 
@@ -19,24 +26,21 @@ export function Header() {
 		}
 	}, [ order.subtotal, setSubtotal ]);
 
-
 	return (
-		<header
-			style={{
-				background: 'red',
-				marginBlockEnd: 50,
-				display: 'flex',
-				justifyContent: 'space-between',
-				padding: '10px'
-			}}
-		>
-			<img
+		<HeaderContainer>
+			<HeaderImage
 				src="https://santex.wpengine.com/wp-content/uploads/2019/02/logo-santex@3x.png"
 				alt="logo"
 			/>
-			<h3>
+			<HeaderSubtotal>
 				{formatPrice(subtotal)}
-			</h3>
-		</header>
+			</HeaderSubtotal>
+			<button
+				style={{ position: 'absolute', right: 0 }}
+				onClick={clearCart}
+			>
+				x
+			</button>
+		</HeaderContainer>
 	);
 };

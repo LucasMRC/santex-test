@@ -1,3 +1,5 @@
+import { useMutation } from '@apollo/client';
+
 // Components
 import {
 	useState,
@@ -9,20 +11,26 @@ import {
 // Components
 import { Header } from './components/Header';
 import { ProductList } from './components/ProductList';
+import { ListContainer } from './components/styled';
 
 // Types
 import { Order } from './types';
 
+// Mutations
+import { CLEAR_CART } from "./graphql/mutations";
+
 export const OrderContext = createContext<{
 	order: Order;
 	updateOrder: Dispatch<SetStateAction<Order>>;
+	clearCart: () => void
 }>({
 	order: {
 		id: '',
 		products: [],
 		subtotal: 0
 	},
-	updateOrder: null as unknown as Dispatch<SetStateAction<Order>>
+	updateOrder: null as unknown as Dispatch<SetStateAction<Order>>,
+	clearCart: () => {}
 });
 
 function App() {
@@ -31,70 +39,31 @@ function App() {
 		products: [],
 		subtotal: 0
 	});
+	const [ clearCart ] = useMutation(CLEAR_CART);
+
+	const handleClearCart = async () => {
+		await clearCart();
+		updateOrder(prevState => ({
+			...prevState,
+			products: [],
+			subtotal: 0
+		}));
+	};
 
 	return (
 		<>
 			<OrderContext.Provider
 				value={{
 					order,
-					updateOrder
+					updateOrder,
+					clearCart: handleClearCart
 				}}
 			>
 				<Header />
-				<div
-					className="list-container"
-				>
+				<ListContainer>
 					<ProductList />
-				</div>
+				</ListContainer>
 			</OrderContext.Provider>
-
-			{/* ======================= */}
-			{/* ===== List Styles ===== */}
-			{/* ======================= */}
-			<style>
-				{`
-					.list-container {
-						display: flex;
-						flex-wrap: wrap;
-					}
-
-					.card {
-						width: 300px;
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-						padding: 10px;
-						border-radius: 10px;
-						border: 1px solid #ccc;
-						margin: 10px 10px;
-						box-shadow: 1px 1px 1px #000;
-						transition: filter ease 1s;
-						background: #ddd;
-					}
-
-					.card:hover {
-						filter: brightness(1.1);
-					}
-
-					.product-image {
-						width: 100%;
-						height: 250px;
-					}
-
-					.card-header {
-						display: flex;
-						justify-content: space-between;
-					}
-
-					.card-description {
-						font-size: 14px;
-					}
-
-				`}
-			</style>
-			{/* ======================= */}
-			{/* ======================= */}
-			{/* ======================= */}
  		</>
 	);
 }

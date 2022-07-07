@@ -22,8 +22,19 @@ const ADD_ITEM_TO_ORDER = gql`
                 }
             }
         }
-    }`
+    }`;
+
+const CLEAR_CART = gql`
+    mutation removeAllOrderLines {
+        order: removeAllOrderLines {
+            ...on Order {
+                id
+            }
+        }
+    }
+    `;
 
 export {
-    ADD_ITEM_TO_ORDER
+    ADD_ITEM_TO_ORDER,
+    CLEAR_CART
 };
