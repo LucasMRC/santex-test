@@ -8,8 +8,6 @@ export default function useOrder() {
 
     if (!orderContext) 
         throw new Error('OrderContext should only be consummed within an context provider');
-    else if (!orderContext.updateOrder) 
-        throw new Error('OrderContext should only be consummed within an context provider');
 
     return orderContext;
 }
