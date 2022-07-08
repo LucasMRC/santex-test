@@ -52,8 +52,8 @@ export function Header() {
 				</HeaderSubtotal>
 				<HeaderTotalItems>
 					{!!totalItems
-						? `${totalItems} item${totalItems === 1 ? '' : 's'} in chart`
-						: 'Start adding items to the chart'
+						? `${totalItems} item${totalItems === 1 ? '' : 's'} in cart`
+						: 'Start adding items to the cart'
 					}
 				</HeaderTotalItems>
 				{ !totalItems ? (
@@ -62,7 +62,7 @@ export function Header() {
 					<HeaderButton
 						onClick={clearCart}
 					>
-						Clear chart
+						Clear cart
 					</HeaderButton>
 				)}
 			</HeaderOrderInfo>

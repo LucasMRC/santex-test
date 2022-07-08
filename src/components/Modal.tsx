@@ -48,7 +48,7 @@ export function Modal({ item, closeModal, addItemToOrder }: Props) {
                 <ModalActionButton
                     onClick={() => addItemToOrder(item)}
                 >
-                    Add to chart
+                    Add to cart
                 </ModalActionButton>
             </ModalContent>
         </ModalContaier>

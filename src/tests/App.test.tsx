@@ -36,7 +36,7 @@ describe('Header', () => {
 
 		expect(screen.getByRole('heading')).toBeInTheDocument();
 		expect(screen.getByAltText('logo')).toBeInTheDocument();
-		expect(screen.getByText('Start adding items to the chart')).toBeInTheDocument();
+		expect(screen.getByText('Start adding items to the cart')).toBeInTheDocument();
 	});
 });
 
