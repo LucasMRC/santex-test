@@ -4,7 +4,6 @@ import {
     CardBody,
     CardHeader,
     CardImage,
-    CardButton,
     CardTitle
 } from './styled';
 
@@ -14,7 +13,9 @@ import { Item } from "../types";
 export function ProductItem({ item, openModal }: { item: Item, openModal: () => void }) {
 
     return (
-        <Card>
+        <Card
+            onClick={openModal}
+        >
             <CardImage
                 src={item.pictureLink}
                 alt={item.slug}
@@ -26,11 +27,6 @@ export function ProductItem({ item, openModal }: { item: Item, openModal: () => 
                     </CardTitle>
                 </CardHeader>
             </CardBody>
-            <CardButton
-                onClick={openModal}
-            >
-                Open
-            </CardButton>
         </Card>
     );
 };

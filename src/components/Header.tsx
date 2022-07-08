@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import {
 	HeaderContainer,
 	HeaderImage,
+	HeaderButton,
 	HeaderOrderInfo,
 	HeaderSubtotal,
 	HeaderTotalItems
@@ -45,15 +46,21 @@ export function Header() {
 					{!!totalItems ? formatPrice(subtotal) : '\xa0'}
 				</HeaderSubtotal>
 				<HeaderTotalItems>
-					{`${totalItems} item${totalItems === 1 ? '' : 's'} in chart`}
+					{!!totalItems
+						? `${totalItems} item${totalItems === 1 ? '' : 's'} in chart`
+						: 'Start adding items to the chart'
+					}
 				</HeaderTotalItems>
+				{ !totalItems ? (
+					<>&nbsp;</>
+				) : (
+					<HeaderButton
+						onClick={clearCart}
+					>
+						Clear chart
+					</HeaderButton>
+				)}
 			</HeaderOrderInfo>
-			<button
-				style={{ position: 'absolute', right: 0 }}
-				onClick={clearCart}
-			>
-				x
-			</button>
 		</HeaderContainer>
 	);
 };

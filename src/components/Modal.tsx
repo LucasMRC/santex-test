@@ -28,7 +28,7 @@ export function Modal({ item, closeModal, addItemToOrder }: Props) {
                     <ModalCloseButton
                         onClick={closeModal}
                     >
-                        X
+                        &#10060;
                     </ModalCloseButton>
                     <ModalTitle>
                         {item.name}

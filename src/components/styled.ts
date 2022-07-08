@@ -17,19 +17,22 @@ export const ListContainer = styled.div`
 
 export const Card = styled.div`
     width: 10rem;
-    height: 13rem;
+    height: 12rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding: .5rem;
     border-radius: .5rem;
-    border: 1px solid #ccc;
+    border: 1px solid #efefef;
     margin: .5rem;
-    box-shadow: 1px 1px 1px #000;
+    box-shadow: 1px 1px .25rem #000;
     transition: filter ease 1s;
     background: #ddd;
+    cursor: pointer;
+    transition: transform ease .5s;
     &:hover {
-        filter: brightness(1.1);
+        transform: scale(1.05);
     }
 `;
 
@@ -40,21 +43,16 @@ export const CardImage = styled.img`
 
 export const CardBody = styled.div``;
 
-export const CardHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
+export const CardHeader = styled.div``;
 
 export const CardTitle = styled.h5``;
-
-export const CardButton = styled.button``;
 
 /* ======================== */
 /* ======== Header ======== */
 /* ======================== */
 
 export const HeaderContainer = styled.header`
-    background: red;
+    background: #333;
     margin-block-end: 3rem;
     display: flex;
     justify-content: space-between;
@@ -82,9 +80,18 @@ export const HeaderTotalItems = styled.p`
 
 export const HeaderImage = styled.img``;
 
-/* ========================= */
-/* ======== Spinner ======== */
-/* ========================= */
+export const HeaderButton = styled.button`
+    background: none;
+    border: none;
+    color: #fff;
+    text-decoration: underline;
+    padding: 0;
+    cursor: pointer;
+`;
+
+/* ========================== */
+/* ======== Skeleton ======== */
+/* ========================== */
 
 const Gradient = keyframes`
     0% {
@@ -109,6 +116,10 @@ export const SkeletonCard = styled(Card)`
     );
     background-size: 50%;
     box-shadow: none;
+    cursor: auto;
+    &:hover {
+        transform: none;
+    }
 `;
 
 /* ======================= */
@@ -127,8 +138,7 @@ export const ModalContaier = styled.div`
     background: #0005;
 `;
 
-    export const ModalContent = styled.div`
-    box-shadow: 0 0 .25rem #000;
+export const ModalContent = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
@@ -136,11 +146,12 @@ export const ModalContaier = styled.div`
     width: 20rem;
     height: 550px;
     border-radius: 0.5rem;
-    background: #808080;
+    background: #efefef;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 `;
 
 export const ModalHeader = styled.div`
@@ -157,7 +168,7 @@ export const ModalTitle = styled(CardTitle)`
 export const ModalImage = styled.img`
     width: 100%;
     height: 14rem;
-    margin: 2rem 0 1rem;
+    margin: 1rem 0 1rem;
 `;
 
 export const ModalPrice = styled(HeaderSubtotal)`
@@ -167,8 +178,8 @@ export const ModalPrice = styled(HeaderSubtotal)`
 
 export const ModalCloseButton = styled.button`
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 1rem;
+    right: 1rem;
     z-index: 1001;
     background: none;
     border: none;
@@ -177,7 +188,8 @@ export const ModalCloseButton = styled.button`
     z-index: 1001;
     transition: color ease 1s;
     color: black;
-    font-size: 1.5rem;
+    font-size: .7rem;
+    filter: brightness(0);
     &:hover {
         color: white;
     }
@@ -185,7 +197,19 @@ export const ModalCloseButton = styled.button`
 
 export const ModalActionButton = styled.button`
     position: absolute;
-    bottom: 1rem;
+    bottom: -1px;
+    width: 120%;
+    font-size: 1.2rem;
+    padding: 1rem;
+    color: #efefef;
+    border: none;
+    border-radius: 1rem;
+    background: #555;
+    cursor: pointer;
+    transition: filter ease 1s;
+    &:hover {
+        filter: brightness(1.5);
+    }
 `;
 
 
