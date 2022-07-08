@@ -1,5 +1,6 @@
 import { MockedResponse } from "@apollo/client/testing";
 import { GET_PRODUCTS } from "../graphql/queries";
+import { FetchedItem } from "../types";
 
 const mocks: MockedResponse<Record<string, any>>[] = [{
     request: {
@@ -10,16 +11,16 @@ const mocks: MockedResponse<Record<string, any>>[] = [{
             products: {
                 items: [
                     {
-                        id: 1,
+                        id: '1',
                         featuredAsset: {
                             preview: ''
                         },
                         description: 'This is a description',
                         slug: 'This is used as an alt text',
-                        name: '',
+                        name: 'Super product',
                         variants: [
                             {
-                                id: 1,
+                                id: '1',
                                 price: 1000
                             }
                         ]
@@ -29,5 +30,29 @@ const mocks: MockedResponse<Record<string, any>>[] = [{
         }
     }
 }];
+
+export const fetchedItem = {
+    data: {
+        products: {
+            items: [
+                {
+                    id: '1',
+                    featuredAsset: {
+                        preview: ''
+                    },
+                    description: 'This is a description',
+                    slug: 'This is used as an alt text',
+                    name: 'Super product',
+                    variants: [
+                        {
+                            id: '1',
+                            price: 1000
+                        }
+                    ]
+                } as FetchedItem
+            ]
+        }
+    }
+};
 
 export default mocks;
