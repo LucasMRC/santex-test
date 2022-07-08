@@ -13,8 +13,6 @@ export const ListContainer = styled.div`
     flex-wrap: wrap;
 `;
 
-// ---- ProductItem ---- //
-
 export const Card = styled.div`
     width: 10rem;
     height: 12rem;
@@ -217,8 +215,3 @@ export const ModalActionButton = styled.button`
         filter: brightness(1.5);
     }
 `;
-
-
-/* ======================= */
-/* ======================= */
-/* ======================= */

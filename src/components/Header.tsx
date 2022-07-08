@@ -15,7 +15,7 @@ import useOrder from '../hooks/useOrder';
 import useStateWithStorage from '../hooks/useStateWithStorage';
 
 // Helpers
-import { formatPrice } from '../helpers/index';
+import { formatPrice } from '../helpers';
 
 export function Header() {
 	const { order, clearCart } = useOrder();

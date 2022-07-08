@@ -52,6 +52,5 @@ export function Modal({ item, closeModal, addItemToOrder }: Props) {
                 </ModalActionButton>
             </ModalContent>
         </ModalContaier>
-
     );
 };

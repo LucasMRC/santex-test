@@ -8,6 +8,7 @@ import { ADD_ITEM_TO_ORDER } from '../graphql/mutations';
 // Components
 import { ProductItem } from './ProductItem';
 import { Modal } from './Modal';
+import { Skeleton } from './Skeleton';
 
 // Types
 import { Item, FetchedOrder } from '../types';
@@ -17,7 +18,6 @@ import { parseItems, parseOrder } from '../helpers';
 
 // Hooks
 import useOrder from '../hooks/useOrder';
-import { Skeleton } from './Skeleton';
 
 export function ProductList() {
 	const { error, data, loading } = useQuery(GET_PRODUCTS);

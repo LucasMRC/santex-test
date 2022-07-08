@@ -1,5 +1,9 @@
 import { MockedResponse } from "@apollo/client/testing";
+
+// Queries
 import { GET_PRODUCTS } from "../graphql/queries";
+
+// Types
 import { FetchedItem } from "../types";
 
 const mocks: MockedResponse<Record<string, any>>[] = [{
