@@ -7,6 +7,7 @@ import {
     ModalCloseButton,
     ModalHeader,
     ModalPrice,
+    ModalText,
     ModalActionButton
 } from './styled';
 
@@ -41,7 +42,9 @@ export function Modal({ item, closeModal, addItemToOrder }: Props) {
                 <ModalPrice>
                     {formatPrice(item.price)}
                 </ModalPrice>
-                {item.description}
+                <ModalText>
+                    {item.description}
+                </ModalText>
                 <ModalActionButton
                     onClick={() => addItemToOrder(item)}
                 >

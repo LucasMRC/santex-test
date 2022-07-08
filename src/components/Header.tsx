@@ -33,7 +33,12 @@ export function Header() {
 			setTotalItems(quantity);
 			subTotalFromOrder.current = order.subtotal;
 		}
-	}, [order.products, order.subtotal, setSubtotal, setTotalItems]);
+	}, [
+		order.products,
+		order.subtotal,
+		setSubtotal,
+		setTotalItems
+	]);
 
 	return (
 		<HeaderContainer>

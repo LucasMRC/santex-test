@@ -41,8 +41,8 @@ function App() {
 	});
 	const [ clearCart ] = useMutation(CLEAR_CART);
 
-	const handleClearCart = async () => {
-		await clearCart();
+	const handleClearCart = () => {
+		clearCart();
 		updateOrder(prevState => ({
 			...prevState,
 			products: [],

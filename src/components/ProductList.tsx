@@ -28,7 +28,8 @@ export function ProductList() {
 
     useEffect(() => {
         if (!loadingFromOrder && dataFromOrder?.order) {
-            updateOrder(parseOrder(dataFromOrder));
+			const parsedOrder = parseOrder(dataFromOrder);
+            updateOrder(parsedOrder);
         }
     }, [ dataFromOrder, loadingFromOrder, updateOrder ]);
 
@@ -50,18 +51,24 @@ export function ProductList() {
     };
 
 	const handleScreen = () => {
-		return loading
-			? (
+		if (loading) {
+			return (
 				<Skeleton />
-			) : error
-				? alert('Something went wrong: ' + error.message)
-				: items.map((item: Item) => (
-					<ProductItem
-						key={item.id}
-						item={item}
-						openModal={() => setProductOnDisplay(item)}
-					/>
-				))
+			);
+		} else if (error) {
+			return (
+				<>
+					{`Something went wrong: ${error.message}`}
+				</>
+			);
+		}
+		return items.map((item: Item) => (
+			<ProductItem
+				key={item.id}
+				item={item}
+				openModal={() => setProductOnDisplay(item)}
+			/>
+		));
 	}
 
 	return (

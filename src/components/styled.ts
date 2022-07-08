@@ -152,6 +152,7 @@ export const ModalContent = styled.div`
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    box-shadow: 1px 1px .25rem #000;
 `;
 
 export const ModalHeader = styled.div`
@@ -174,6 +175,11 @@ export const ModalImage = styled.img`
 export const ModalPrice = styled(HeaderSubtotal)`
     align-self: flex-end;
     margin: 0 0 1rem;
+`;
+
+export const ModalText = styled.p`
+    margin: 0;
+    font-size: .95rem;
 `;
 
 export const ModalCloseButton = styled.button`

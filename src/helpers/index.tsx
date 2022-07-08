@@ -1,4 +1,9 @@
-import { FetchedItem, FetchedOrder, Item } from "../types";
+import {
+    FetchedItem,
+    FetchedOrder,
+    Item,
+    Order
+} from "../types";
 
 type FetchedItemResponse = {
     products: {
@@ -12,10 +17,11 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 export const formatPrice = (price: number) => {
+    const [ dollars, cents ] = formatter.format(price).split('.');
     return (
         <>
-            {formatter.format(price).split('.')[0]}
-            <sup>00</sup>
+            {dollars}
+            <sup>{cents}</sup>
         </>
     );
 };
@@ -31,7 +37,7 @@ export const parseItems = ({ products: { items }}: FetchedItemResponse) =>
         variantId: item.variants[0].id // needed to update the order
     } as Item));
 
-export const parseOrder = ({ order }: FetchedOrder) => {
+export const parseOrder = ({ order }: FetchedOrder): Order => {
     return {
         id: order.id,
         subtotal: order.subTotal,

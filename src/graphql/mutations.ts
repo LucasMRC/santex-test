@@ -3,24 +3,29 @@ import {
     gql
 } from '@apollo/client';
 
+const ACTIVE_ORDER = gql`
+    fragment ActiveOrder on Order {
+        id
+        subTotal
+        lines {
+            productVariant {
+                id
+                name
+                price
+            }
+            quantity
+        }
+    }
+`;
+
 const ADD_ITEM_TO_ORDER = gql`
-    mutation AddItemToOrder(
+    ${ACTIVE_ORDER}
+    mutation addItemToOrder(
         $productVariantId: ID!
         $quantity: Int!
     ) {
         order: addItemToOrder(productVariantId: $productVariantId, quantity: $quantity) {
-            ...on Order {
-                id
-                subTotal
-                lines {
-                    productVariant {
-                        id
-                        name
-                        price
-                    }
-                    quantity
-                }
-            }
+            ...ActiveOrder
         }
     }`;
 
